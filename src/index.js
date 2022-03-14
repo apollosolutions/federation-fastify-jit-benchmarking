@@ -1,19 +1,19 @@
-import { ApolloGateway, IntrospectAndCompose } from "@apollo/gateway";
-import { ApolloServer } from "apollo-server";
+const { ApolloGateway, IntrospectAndCompose } = require("@apollo/gateway");
+const { ApolloServer } = require("apollo-server");
 
 const gateway = new ApolloGateway({
   supergraphSdl: new IntrospectAndCompose({
     subgraphs: [
       {
-        name: 'authors',
+        name: 'users',
         url: 'http://localhost:4001/graphql',
       },
       {
-        name: 'posts',
+        name: 'reviews',
         url: 'http://localhost:4002/graphql',
       },
     ],
-  }),
+  })
 });
 
 const server = new ApolloServer({
@@ -22,5 +22,5 @@ const server = new ApolloServer({
 });
 
 server.listen(4000).then(({ url }) => {
-  console.log(`🚀 Gateway API running at ${url}`);
+  console.log(`🚀 Gateway ready at ${url}`);
 });

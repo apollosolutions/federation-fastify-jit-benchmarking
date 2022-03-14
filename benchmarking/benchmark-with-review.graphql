@@ -1,0 +1,10 @@
+query BenchmarkWithReview {
+  review(id: 1) {
+    content
+    id
+    user {
+      id
+      username
+    }
+  }
+}

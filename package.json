@@ -1,26 +1,42 @@
 {
-  "name": "solutions-gateway-template",
+  "name": "federation-fastify-jit-benchmarking",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "private": true,
   "license": "MIT",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-      "start": "concurrently -k npm:server:*",
-      "server:authors": "nodemon ./services/authors/index.js",
-      "server:posts": "nodemon ./services/posts/index.js",
-      "server:gateway": "wait-on tcp:4001 tcp:4002 && nodemon ./gateway/index.js"
+    "basic": "concurrently -k \"npm run users:basic\" \"npm run reviews:basic\" \"npm run gateway:basic\"",
+    "with-fastify": "concurrently -k \"npm run users:fastify\" \"npm run reviews:fastify\" \"npm run gateway:fastify\"",
+    "with-jit": "concurrently -k \"npm run users:jit\" \"npm run reviews:jit\" \"npm run gateway:jit\"",
+    "with-fastify-and-jit": "concurrently -k \"npm run users:fastify-and-jit\" \"npm run reviews:fastify-and-jit\" \"npm run gateway:fastify-and-jit\"",
+    "gateway:basic": "wait-on tcp:4001 tcp:4002 && node ./src/index.js",
+    "gateway:fastify": "wait-on tcp:4011 tcp:4012 && node ./src/index-fastify.js",
+    "gateway:jit": "wait-on tcp:4021 tcp:4022 && node ./src/index-jit.js",
+    "gateway:fastify-and-jit": "wait-on tcp:4031 tcp:4032 && node ./src/index-fastify-and-jit.js",
+    "users:basic": "node ./src/services/users.js",
+    "users:fastify": "node ./src/services/users-fastify.js",
+    "users:jit": "node ./src/services/users-jit.js",
+    "users:fastify-and-jit": "node ./src/services/users-fastify-and-jit.js",
+    "reviews:basic": "node ./src/services/reviews.js",
+    "reviews:fastify": "node ./src/services/reviews-fastify.js",
+    "reviews:jit": "node ./src/services/reviews-jit.js",
+    "reviews:fastify-and-jit": "node ./src/services/reviews-fastify-and-jit.js"
   },
   "dependencies": {
       "@apollo/subgraph": "^0.3.3",
       "@apollo/gateway": "^0.48.3",
       "apollo-server": "^3.6.4",
-      "graphql": "^16.3.0"  
+      "apollo-server-fastify": "^3.6.4",
+      "fastify": "^3.27.4",
+      "graphql": "^16.3.0",
+      "graphql-jit": "^0.7.3"
   },
   "devDependencies": {
-    "concurrently": "^5.3.0",
-    "dotenv": "^8.2.0",
-    "nodemon": "^2.0.7",
-    "wait-on": "^5.2.1"
+    "concurrently": "^7.0.0",
+    "dotenv": "^16.0.0",
+    "nodemon": "^2.0.15",
+    "tiny-lru": "^8.0.2",
+    "wait-on": "^6.0.1"
   }
 }
