@@ -24,13 +24,13 @@
     "reviews:fastify-and-jit": "node ./src/services/reviews-fastify-and-jit.js"
   },
   "dependencies": {
-      "@apollo/subgraph": "^0.3.3",
-      "@apollo/gateway": "^0.48.3",
-      "apollo-server": "^3.6.4",
-      "apollo-server-fastify": "^3.6.4",
-      "fastify": "^3.27.4",
-      "graphql": "^16.3.0",
-      "graphql-jit": "^0.7.3"
+    "@apollo/gateway": "^0.48.3",
+    "@apollo/subgraph": "^0.3.3",
+    "apollo-server": "^3.6.4",
+    "apollo-server-fastify": "^3.6.4",
+    "fastify": "^3.27.4",
+    "graphql": "^16.3.0",
+    "graphql-jit": "^0.7.3"
   },
   "devDependencies": {
     "concurrently": "^7.0.0",

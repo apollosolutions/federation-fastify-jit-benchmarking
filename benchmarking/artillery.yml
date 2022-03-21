@@ -1,0 +1,64 @@
+config:
+  environments:
+    basic:
+      target: http://localhost:4000/graphql
+    with-fastify:
+      target: http://localhost:4010/graphql
+    with-jit:
+      target: http://localhost:4020/graphql
+    with-fastify-and-jit:
+      target: http://localhost:4030/graphql
+  phases:
+    - name: Warm up
+      duration: 5
+      arrivalRate: 5
+    - name: Ramp up load
+      duration: 30
+      arrivalRate: 5
+      rampTo: 50
+    - name: Sustained load
+      duration: 60
+      arrivalRate: 50
+
+scenarios:
+  - name: "BenchmarkWithUserIdOnly"
+    flow:
+      - post:
+          url: "/"
+          json:
+            query: |
+              query BenchmarkWithUserIdOnly {
+                user(id: 1) {
+                  id
+                }
+              }
+
+  - name: "BenchmarkWithUser"
+    flow:
+      - post:
+          url: "/"
+          json:
+            query: |
+              query BenchmarkWithUser {
+                user(id: 1) {
+                  id
+                  username
+                }
+              }
+
+  - name: "BenchmarkWithReview"
+    flow:
+      - post:
+          url: "/"
+          json:
+            query: |
+              query BenchmarkWithReview {
+                review(id: 1) {
+                  content
+                  id
+                  user {
+                    id
+                    username
+                  }
+                }
+              }

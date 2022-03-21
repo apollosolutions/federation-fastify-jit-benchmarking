@@ -1,5 +1,0 @@
-query BenchmarkWithUserIdOnly {
-    user(id: 1) {
-      id
-    }
-}

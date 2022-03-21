@@ -1,2 +1,4 @@
 node_modules/
 .env
+benchmarking/*.json
+benchmarking/*.html

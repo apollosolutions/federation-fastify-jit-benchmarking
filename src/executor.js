@@ -36,8 +36,6 @@ const executor = (
       }
     }
 
-    console.warn(`[HOT], Precompiled ${wasCompiled}`);
-
     return compiledQuery.query(undefined, context, request.variables || {}); // HOT
   };
 };
