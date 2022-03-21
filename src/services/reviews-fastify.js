@@ -1,5 +1,6 @@
 const { ApolloServer, gql } = require("apollo-server-fastify");
 const { buildSubgraphSchema } = require("@apollo/subgraph");
+const { ApolloServerPluginInlineTraceDisabled } = require("apollo-server-core");
 const app = require("fastify")();
 
 const reviews = [{ id: "1", userID: "1", content: "Hello, world!" }];
@@ -34,7 +35,8 @@ const resolvers = {
 };
 
 const server = new ApolloServer({
-  schema: buildSubgraphSchema([{ typeDefs, resolvers }])
+  schema: buildSubgraphSchema([{ typeDefs, resolvers }]),
+  plugins: [ApolloServerPluginInlineTraceDisabled()]
 });
 
 (async function () {

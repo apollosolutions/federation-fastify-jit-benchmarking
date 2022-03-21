@@ -1,0 +1,1 @@
+{"query":"query BenchmarkWithUser {\n  user(id: 1) {\n    id\n    username\n  }\n}"}

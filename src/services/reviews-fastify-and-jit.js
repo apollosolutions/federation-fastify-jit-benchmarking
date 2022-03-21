@@ -1,5 +1,6 @@
 const { ApolloServer, gql } = require("apollo-server-fastify");
 const { buildSubgraphSchema } = require("@apollo/subgraph");
+const { ApolloServerPluginInlineTraceDisabled } = require("apollo-server-core");
 const app = require("fastify")();
 
 const { executor } = require("../executor");
@@ -47,7 +48,8 @@ const schema = buildSubgraphSchema([{ typeDefs, resolvers }]);
 const server = new ApolloServer({
   schema,
   executor: executor(schema),
-  experimental_approximateDocumentStoreMiB: 120 // increase document cache
+  experimental_approximateDocumentStoreMiB: 120, // increase document cache
+  plugins: [ApolloServerPluginInlineTraceDisabled()]
 });
 
 (async function () {

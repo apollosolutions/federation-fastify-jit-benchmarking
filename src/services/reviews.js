@@ -1,5 +1,6 @@
 const { ApolloServer, gql } = require("apollo-server");
 const { buildSubgraphSchema } = require("@apollo/subgraph");
+const { ApolloServerPluginInlineTraceDisabled } = require("apollo-server-core");
 
 const reviews = [{ id: "1", userID: "1", content: "Hello, world!" }];
 
@@ -33,7 +34,8 @@ const resolvers = {
 };
 
 const server = new ApolloServer({
-  schema: buildSubgraphSchema([{ typeDefs, resolvers }])
+  schema: buildSubgraphSchema([{ typeDefs, resolvers }]),
+  plugins: [ApolloServerPluginInlineTraceDisabled()]
 });
 
 server.listen(4002).then(({ url }) => {

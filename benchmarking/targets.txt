@@ -1,0 +1,3 @@
+POST http://localhost:4000/graphql
+Content-Type: application/json
+@/Users/shanemyrick/src/github/apollosolutions/federation-fastify-jit-benchmarking/benchmarking/benchmark-with-user.json

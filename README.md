@@ -28,7 +28,7 @@ Start the four different gateways with their implementing services:
 ```sh
 npm run basic
 npm run with-fastify
-npm run jit
+npm run with-jit
 npm run with-fastify-and-jit
 ```
 

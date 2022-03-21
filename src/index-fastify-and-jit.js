@@ -1,5 +1,6 @@
 const { ApolloGateway, IntrospectAndCompose } = require("@apollo/gateway");
 const { ApolloServer } = require("apollo-server-fastify");
+const { ApolloServerPluginInlineTraceDisabled } = require("apollo-server-core");
 const app = require("fastify")();
 
 const gateway = new ApolloGateway({
@@ -19,7 +20,8 @@ const gateway = new ApolloGateway({
 
 const server = new ApolloServer({
   gateway,
-  subscriptions: false
+  subscriptions: false,
+  plugins: [ApolloServerPluginInlineTraceDisabled()]
 });
 
 (async function () {
